@@ -1,0 +1,39 @@
+services:
+  ubuntu-desktop:
+    image: codespaces-blank/ubuntu-desktop:clean
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+    network_mode: host
+    volumes:
+      - ./chrome-profile:/home/kasm-user/chrome-profile
+      - ./chrome-policies.json:/etc/opt/chrome/policies/managed/snapchat.json:ro
+      - ./uploads:/home/kasm-user/Uploads
+      - ./uploads:/usr/share/backgrounds/custom:ro
+    entrypoint:
+      - /bin/bash
+      - -lc
+      - /usr/local/bin/clean-desktop & exec /dockerstartup/kasm_default_profile.sh /dockerstartup/vnc_startup.sh /dockerstartup/kasm_startup.sh "$@"
+    shm_size: 2gb
+    cpu_shares: 1024
+    tmpfs:
+      - /tmp:size=512m,mode=1777,exec
+    environment:
+      VNC_PW: ${VNC_PASSWORD:?Set VNC_PASSWORD before starting}
+      MAX_FRAME_RATE: "60"
+      KASM_SVC_WEBCAM: "1"
+      KASM_SVC_AUDIO: "1"
+      KASM_SVC_AUDIO_INPUT: "1"
+      XDG_CONFIG_DIRS: "/etc/xdg"
+    restart: unless-stopped
+
+  ubuntu-proxy:
+    image: nginx:1.27-alpine
+    network_mode: host
+    depends_on:
+      ubuntu-desktop:
+        condition: service_started
+    volumes:
+      - ./nginx-ubuntu.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
+

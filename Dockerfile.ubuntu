@@ -1,0 +1,68 @@
+FROM kasmweb/ubuntu-jammy-desktop:1.19.0
+
+USER root
+
+RUN rm -f /etc/apt/sources.list.d/hashicorp.list \
+    && apt-get update \
+    && apt-get purge -y \
+        gimp \
+        nextcloud* \
+        onlyoffice-desktopeditors \
+        remmina \
+        signal-desktop \
+        slack-desktop \
+        sublime-text \
+        telegram-desktop \
+        thunderbird \
+    && apt-get autoremove -y \
+    && apt-get install -y --no-install-recommends \
+        audacity \
+        baobab \
+        evince \
+        filezilla \
+        gnome-disk-utility \
+        inkscape \
+        libreoffice \
+        pavucontrol \
+        vlc \
+        xournalpp \
+        zenity \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/* /tmp/* /var/tmp/* \
+        /opt/zoom /opt/onlyoffice /opt/sublime_text \
+    && rm -f /usr/share/applications/onlyoffice*.desktop
+
+RUN rm -f /home/kasm-user/Desktop/com.obsproject.Studio.desktop \
+    /home/kasm-user/Desktop/google-chrome.desktop \
+    /home/kasm-user/Desktop/gimp.desktop \
+    /home/kasm-user/Desktop/nextcloud.desktop \
+    /home/kasm-user/Desktop/onlyoffice-desktopeditors.desktop \
+    /home/kasm-user/Desktop/org.remmina.Remmina.desktop \
+    /home/kasm-user/Desktop/signal-desktop.desktop \
+    /home/kasm-user/Desktop/slack.desktop \
+    /home/kasm-user/Desktop/sublime_text.desktop \
+    /home/kasm-user/Desktop/telegram.desktop \
+    /home/kasm-user/Desktop/thunderbird.desktop \
+    /home/kasm-user/Desktop/Zoom.desktop \
+    /usr/share/applications/com.nextcloud.desktopclient.nextcloud.desktop \
+    /usr/share/applications/signal-desktop.desktop
+
+COPY set-wallpaper.sh /usr/local/bin/set-wallpaper
+COPY set-wallpaper.desktop /usr/share/applications/set-wallpaper.desktop
+COPY clean-desktop.sh /usr/local/bin/clean-desktop
+COPY google-chrome-pulseos.desktop /usr/share/applications/google-chrome-pulseos.desktop
+COPY pulseos-terminal.desktop /usr/share/applications/pulseos-terminal.desktop
+COPY pulseos-file-manager.desktop /usr/share/applications/pulseos-file-manager.desktop
+RUN chmod 755 /usr/local/bin/set-wallpaper \
+    && chmod 644 /usr/share/applications/set-wallpaper.desktop \
+    && chmod 755 /usr/local/bin/clean-desktop \
+    && chmod 644 /usr/share/applications/google-chrome-pulseos.desktop \
+        /usr/share/applications/pulseos-terminal.desktop \
+        /usr/share/applications/pulseos-file-manager.desktop
+
+RUN mkdir -p /home/kasm-user/Desktop \
+    && cp /usr/share/applications/google-chrome-pulseos.desktop /home/kasm-user/Desktop/google-chrome-pulseos.desktop \
+    && chown -R 1000:1000 /home/kasm-user/Desktop \
+    && chmod 755 /home/kasm-user/Desktop/google-chrome-pulseos.desktop
+
+USER 1000

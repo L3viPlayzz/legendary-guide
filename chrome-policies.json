@@ -1,0 +1,8 @@
+{
+  "HomepageLocation": "https://web.snapchat.com/",
+  "HomepageIsNewTabPage": false,
+  "RestoreOnStartup": 4,
+  "RestoreOnStartupURLs": [
+    "https://web.snapchat.com/"
+  ]
+}

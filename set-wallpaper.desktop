@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Achtergrond kiezen
+Comment=Kies een geuploade afbeelding als bureaubladachtergrond
+Exec=/usr/local/bin/set-wallpaper
+Icon=preferences-desktop-wallpaper
+Terminal=false
+Categories=Settings;DesktopSettings;
