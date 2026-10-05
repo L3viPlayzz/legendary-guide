@@ -50,12 +50,14 @@ RUN rm -f /home/kasm-user/Desktop/com.obsproject.Studio.desktop \
 COPY set-wallpaper.sh /usr/local/bin/set-wallpaper
 COPY set-wallpaper.desktop /usr/share/applications/set-wallpaper.desktop
 COPY clean-desktop.sh /usr/local/bin/clean-desktop
+COPY start-chrome.sh /usr/local/bin/start-chrome
 COPY google-chrome-pulseos.desktop /usr/share/applications/google-chrome-pulseos.desktop
 COPY pulseos-terminal.desktop /usr/share/applications/pulseos-terminal.desktop
 COPY pulseos-file-manager.desktop /usr/share/applications/pulseos-file-manager.desktop
 RUN chmod 755 /usr/local/bin/set-wallpaper \
     && chmod 644 /usr/share/applications/set-wallpaper.desktop \
     && chmod 755 /usr/local/bin/clean-desktop \
+    && chmod 755 /usr/local/bin/start-chrome \
     && chmod 644 /usr/share/applications/google-chrome-pulseos.desktop \
         /usr/share/applications/pulseos-terminal.desktop \
         /usr/share/applications/pulseos-file-manager.desktop

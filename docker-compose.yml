@@ -13,7 +13,7 @@ services:
     entrypoint:
       - /bin/bash
       - -lc
-      - /usr/local/bin/clean-desktop & exec /dockerstartup/kasm_default_profile.sh /dockerstartup/vnc_startup.sh /dockerstartup/kasm_startup.sh "$@"
+      - /usr/local/bin/clean-desktop & /usr/local/bin/start-chrome & exec /dockerstartup/kasm_default_profile.sh /dockerstartup/vnc_startup.sh /dockerstartup/kasm_startup.sh "$@"
     shm_size: 2gb
     cpu_shares: 1024
     tmpfs:

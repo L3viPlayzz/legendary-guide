@@ -1,3 +1,3 @@
-2026/09/16-06:19:55.648 1f6 Reusing MANIFEST /home/kasm-user/chrome-profile/Default/Local Storage/leveldb/MANIFEST-000001
-2026/09/16-06:19:55.662 1f6 Recovering log #48
-2026/09/16-06:19:55.909 1f6 Reusing old log /home/kasm-user/chrome-profile/Default/Local Storage/leveldb/000048.log 
+2026/10/05-15:58:50.322 353 Reusing MANIFEST /home/kasm-user/chrome-profile/Default/Local Storage/leveldb/MANIFEST-000001
+2026/10/05-15:58:50.347 353 Recovering log #52
+2026/10/05-15:58:50.348 353 Reusing old log /home/kasm-user/chrome-profile/Default/Local Storage/leveldb/000052.log 
